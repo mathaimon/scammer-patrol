@@ -12,7 +12,7 @@
 </script>
 
 <nav
-	class="fixed z-40 flex h-14 w-full items-center justify-between border-b-2 border-opacity-85 bg-background bg-opacity-75 px-10 backdrop-blur-md"
+	class="fixed z-40 flex h-14 w-full items-center justify-between border-b-2 border-opacity-85 bg-background bg-opacity-75 px-3 backdrop-blur-md md:px-10"
 >
 	<a href="/" class="flex items-center gap-3">
 		<img
@@ -24,7 +24,7 @@
 	</a>
 	<DropdownMenu.Root>
 		<DropdownMenu.Trigger asChild let:builder>
-			<Button builders={[builder]} variant="secondary" size="icon">
+			<Button builders={[builder]} variant="outline" size="icon">
 				<Sun
 					class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
 				/>
@@ -41,7 +41,7 @@
 		</DropdownMenu.Content>
 	</DropdownMenu.Root>
 </nav>
-<div class="min-h-dvh px-10 pt-20">
+<div class="flex min-h-dvh w-full justify-center px-3 pb-10 pt-20 md:px-10">
 	<ModeWatcher />
 	<slot></slot>
 </div>
