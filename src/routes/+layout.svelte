@@ -12,7 +12,7 @@
 </script>
 
 <nav
-	class="fixed z-40 flex h-14 w-full items-center justify-between border-b-2 border-opacity-85 bg-background bg-opacity-75 px-3 backdrop-blur-md md:px-10"
+	class="fixed z-40 flex h-14 w-full items-center justify-between border-b-2 border-opacity-85 bg-background bg-opacity-65 px-3 backdrop-blur-md md:px-10"
 >
 	<a href="/" class="flex items-center gap-3">
 		<img
