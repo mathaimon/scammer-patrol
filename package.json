@@ -36,6 +36,7 @@
 		"@fontsource-variable/rethink-sans": "^5.1.0",
 		"bits-ui": "^0.21.16",
 		"clsx": "^2.1.1",
+		"firebase": "^10.14.0",
 		"lucide-svelte": "^0.451.0",
 		"mode-watcher": "^0.4.1",
 		"tailwind-merge": "^2.5.3",
