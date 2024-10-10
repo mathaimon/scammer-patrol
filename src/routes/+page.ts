@@ -1,6 +1,6 @@
 import type { PageLoad } from './$types';
 
-const dummyData: ScammerList = [
+const dummyData: Scammer[] = [
 	{
 		id: 'ggg-d32',
 		name: 'John Doe',

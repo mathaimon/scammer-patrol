@@ -1,4 +1,4 @@
-interface Scammer {
+type Scammer = {
 	id: string;
 	name: string;
 	orgName?: string;
@@ -6,6 +6,5 @@ interface Scammer {
 	phone?: number;
 	email?: string;
 	description: string;
-}
-
-type ScammerList = Scammer[];
+	// searchTerms?: string;
+};
