@@ -5,6 +5,18 @@
 	import { Checkbox } from '$lib/components/ui/checkbox/index.js';
 	import { Textarea } from '$lib/components/ui/textarea/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { FilePlus, Trash2 } from 'lucide-svelte';
+
+	let imageUrlInputs: string[] = [''];
+	const addUrlInput = () => {
+		imageUrlInputs = [...imageUrlInputs, ''];
+	};
+	const removeUrlInput = (index: number) => {
+		if (imageUrlInputs.length > 1) {
+			imageUrlInputs = imageUrlInputs.filter((_, i) => i !== index);
+			console.log(`Removed Item Index: ${index}`);
+		}
+	};
 </script>
 
 <Card.Root class="h-fit w-full max-w-xl">
@@ -57,7 +69,20 @@
 				</div>
 				<div class="flex flex-col space-y-1.5">
 					<Label for="image">Image</Label>
-					<Input id="image" type="file" />
+					{#each imageUrlInputs as _, index}
+						<div class="flex gap-2">
+							<Input id="image" bind:value={imageUrlInputs[index]} />
+							<Button
+								variant="secondaryDestructive"
+								size="icon"
+								on:click={() => removeUrlInput(index)}
+								disabled={imageUrlInputs.length === 1}><Trash2 class="size-4" /></Button
+							>
+						</div>
+					{/each}
+					<Button variant="secondary" class="mx-auto w-fit" on:click={addUrlInput}
+						><FilePlus class="mr-2 size-4" />Add Image Url</Button
+					>
 				</div>
 			</div>
 		</form>

@@ -41,7 +41,7 @@
 		</DropdownMenu.Content>
 	</DropdownMenu.Root>
 </nav>
-<div class="flex min-h-dvh w-full justify-center px-3 pb-10 pt-20 md:px-10">
+<div class="flex min-h-dvh w-full flex-col items-center px-3 pb-10 pt-20 md:px-10">
 	<ModeWatcher />
 	<slot></slot>
 </div>
