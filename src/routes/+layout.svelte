@@ -6,11 +6,13 @@
 	import { resetMode, setMode } from 'mode-watcher';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { ProgressBar } from '@prgm/sveltekit-progress-bar';
 
 	import Sun from 'lucide-svelte/icons/sun';
 	import Moon from 'lucide-svelte/icons/moon';
 </script>
 
+<ProgressBar class="text-primary" zIndex={100} />
 <nav
 	class="fixed z-40 flex h-14 w-full items-center justify-between border-b-2 border-opacity-85 bg-background bg-opacity-65 px-3 backdrop-blur-md md:px-10"
 >
