@@ -15,6 +15,7 @@
 	export let data: PageData;
 
 	const form = superForm(data.form, {
+		taintedMessage: 'Are you sure you want to leave?',
 		validators: zodClient(formSchema)
 	});
 
@@ -155,6 +156,9 @@
 							<Form.FieldErrors />
 						</Form.ElementField>
 					{/each}
+					<Form.Description class="opacity-60"
+						>Url should of format https://domain.com/image.jpg</Form.Description
+					>
 					<Form.FieldErrors />
 					<Button variant="secondary" class="mx-auto w-fit" on:click={addUrlInput}
 						><FilePlus class="mr-2 size-4" />Add Image Url</Button
