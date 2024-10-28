@@ -3,6 +3,8 @@ import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { formSchema } from './schema';
 import { zod } from 'sveltekit-superforms/adapters';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { db } from '$lib/firebase/firebase';
 
 export const load: PageServerLoad = async () => {
 	return {
@@ -19,6 +21,11 @@ export const actions: Actions = {
 				form
 			});
 		}
+		await addDoc(collection(db, 'scammers'), {
+			...form.data,
+			createdAt: serverTimestamp(),
+			createdBy: 'anon'
+		});
 		return {
 			form
 		};

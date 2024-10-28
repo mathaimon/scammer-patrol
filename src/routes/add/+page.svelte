@@ -11,12 +11,20 @@
 	import { formSchema } from './schema';
 	import { superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 
 	const form = superForm(data.form, {
 		taintedMessage: 'Are you sure you want to leave?',
-		validators: zodClient(formSchema)
+		validators: zodClient(formSchema),
+		applyAction: false,
+		onResult({ result }) {
+			console.log(result);
+			if (result.status === 200) {
+				setTimeout(() => goto('/'), 0);
+			}
+		}
 	});
 
 	const { form: formData, enhance } = form;
