@@ -8,7 +8,7 @@ export const formSchema = z.object({
 	country: z.string().min(3, { message: 'Country should be atleast 3 characters' }),
 	pincode: z.string(),
 	phonePrefix: z.coerce.number().default(91),
-	phone: z.string().min(8, { message: 'Phone no. should be atleast 8 characters' }),
+	phone: z.string().min(6, { message: 'Phone no. should be atleast 6 characters' }),
 	email: z.string().email(),
 	description: z.string().min(50, { message: 'Description should be atleast 50 characters' }),
 	imageUrls: z
