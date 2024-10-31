@@ -1,26 +1,50 @@
 <script lang="ts">
 	import { createScammerStore, searchHandler } from '$lib/stores/scammer';
-	import { onDestroy } from 'svelte';
-	import type { PageData } from './$types';
+	import { onDestroy, onMount } from 'svelte';
+	import { collection, getDocs } from 'firebase/firestore';
+	import { db } from '$lib/firebase/firebase';
+	import { fbDataSchema, type FbDataSchema } from './schema';
 
 	import * as Card from '$lib/components/ui/card';
 	import { Badge } from '$lib/components/ui/badge';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import { ExternalLink } from 'lucide-svelte';
-	import { MapPin } from 'lucide-svelte';
+	import { MapPin, Phone } from 'lucide-svelte';
 	import { Search } from 'lucide-svelte';
 
-	export let data: PageData;
-	const scammerDetails = data.scammerDetails.map((scammer) => ({
-		...scammer,
-		searchTerms: `${scammer.name} ${scammer.orgName} ${scammer.address} ${scammer.phone}`
-	}));
+	let firebaseData: FbDataSchema[] = [];
+	const scammerStore = createScammerStore(firebaseData);
+	const unsubscribeStore = scammerStore.subscribe((model) => searchHandler(model));
 
-	const scammerStore = createScammerStore(scammerDetails);
-	const unsubscribe = scammerStore.subscribe((model) => searchHandler(model));
+	onMount(async () => {
+		const querySnapshot = await getDocs(collection(db, 'scammers'));
+		const loadedData: FbDataSchema[] = []; // Temporary array to hold data
+
+		querySnapshot.forEach((doc) => {
+			let data = doc.data();
+			data = {
+				...data,
+				id: doc.id,
+				createdAt: doc.data().createdAt.toDate(),
+				searchTerms: `${data.name} ${data.orgName} ${data.addressLine1} ${data.addressLine2} ${data.country} ${data.phone} ${data.email}`
+			};
+			const parseResult = fbDataSchema.safeParse(data);
+			if (parseResult.success) {
+				console.log(parseResult.data);
+				loadedData.push(parseResult.data); // Add validated data to temporary array
+			} else {
+				console.error(parseResult.error);
+			}
+		});
+
+		// Assign loadedData to firebaseData in one go to trigger reactivity
+		firebaseData = loadedData;
+		scammerStore.set({ data: firebaseData, filtered: firebaseData, search: '' });
+	});
+
 	onDestroy(() => {
-		unsubscribe();
+		unsubscribeStore();
 	});
 </script>
 
@@ -47,7 +71,11 @@
 					<div class="opacity-75">{scammer.orgName}</div>
 					<div class="flex items-center gap-2">
 						<MapPin size={20} class="opacity-75" />
-						<p class="mt-2">{scammer.address}</p>
+						<p class="mt-2">{scammer.addressLine1}, {scammer.addressLine2}, {scammer.country}</p>
+					</div>
+					<div class="flex items-center gap-2">
+						<Phone size={20} class="opacity-75" />
+						<p class="mt-2">+{scammer.phonePrefix} {scammer.phone}</p>
 					</div>
 				</Card.Content>
 				<Card.Footer class="flex w-full justify-between">

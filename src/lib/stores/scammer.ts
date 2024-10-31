@@ -1,12 +1,13 @@
 import { writable } from 'svelte/store';
+import { type FbDataSchema } from '../../routes/schema';
 
 export interface ScammerStoreModel {
-	data: (Scammer & { searchTerms?: string })[];
-	filtered: Scammer[];
+	data: FbDataSchema[];
+	filtered: FbDataSchema[];
 	search: string;
 }
 
-export const createScammerStore = (scammer: Scammer[]) => {
+export const createScammerStore = (scammer: FbDataSchema[]) => {
 	const { subscribe, set, update } = writable<ScammerStoreModel>({
 		data: scammer,
 		filtered: scammer,
