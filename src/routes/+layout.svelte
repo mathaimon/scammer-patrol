@@ -48,6 +48,26 @@
 	<slot></slot>
 </div>
 
+<svelte:head>
+	<title>Scammer Patrol</title>
+	<meta name="description" content="View and Report Scammers" />
+
+	<!-- Facebook Meta Tags -->
+	<meta property="og:url" content="https://scammer-patrol.vercel.app" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Scammer Patrol" />
+	<meta property="og:description" content="View and Report Scammers" />
+	<meta property="og:image" content="https://scammer-patrol.vercel.app/og_image.png" />
+
+	<!-- Twitter Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta property="twitter:domain" content="scammer-patrol.vercel.app" />
+	<meta property="twitter:url" content="https://scammer-patrol.vercel.app" />
+	<meta name="twitter:title" content="Scammer Patrol" />
+	<meta name="twitter:description" content="View and Report Scammers" />
+	<meta name="twitter:image" content="https://scammer-patrol.vercel.app/og_image.png" />
+</svelte:head>
+
 <style>
 	:global(body) {
 		font-family: 'Rethink Sans Variable', sans-serif;
